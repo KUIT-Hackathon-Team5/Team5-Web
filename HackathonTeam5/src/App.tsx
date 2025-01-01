@@ -1,7 +1,8 @@
 import "./App.css";
+import Onboarding from "./pages/onboarding/Onboarding";
 
 function App() {
-  return <h1>test commit</h1>;
+  return <Onboarding />;
 }
 
 export default App;
