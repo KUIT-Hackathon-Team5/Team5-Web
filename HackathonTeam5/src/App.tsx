@@ -1,8 +1,8 @@
 import "./App.css";
-import Onboarding from "./pages/onboarding/Onboarding";
+import Login from "./pages/login/Login";
 
 function App() {
-  return <Onboarding />;
+  return <Login />;
 }
 
 export default App;

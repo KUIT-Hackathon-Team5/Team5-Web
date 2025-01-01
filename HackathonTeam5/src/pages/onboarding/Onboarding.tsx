@@ -1,6 +1,5 @@
 import React from 'react'
-import Components from "./Onboarding.styles"
-const { OnboardingContainer, OnboardingTitle, OnboardingSubtitle } = Components;
+import { OnboardingContainer, OnboardingTitle, OnboardingSubtitle } from './Onboarding.styles'
 
 const Onboarding = () => {
   return (
