@@ -19,7 +19,8 @@ const Login = () => {
     console.log("Password:", newPassword);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     console.log("Login Attempted with:");
     console.log("Email:", email);
     console.log("Password:", password);

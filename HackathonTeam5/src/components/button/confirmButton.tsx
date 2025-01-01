@@ -7,7 +7,7 @@ interface ConfirmButtonProps {
   height: string; // 버튼 높이
   fontSize: string; // 폰트 크기
   backgroundcolor: string; // 버튼 배경색
-  onClick: () => void; // 클릭 핸들러
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void; // 클릭 핸들러
 }
 
 const ConfirmButton = (props: ConfirmButtonProps) => {
