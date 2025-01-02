@@ -25,6 +25,8 @@ const Login = () => {
     console.log("Email:", email);
     console.log("Password:", password);
   };
+  
+  const isButtonDisabled = !email || !password
 
   return (
     <LoginContainer>
@@ -55,6 +57,7 @@ const Login = () => {
           fontSize="19px"
           backgroundcolor="#42D596"
           onClick={handleLogin}
+          disabled={isButtonDisabled}
         />
       </LoginForm>
 

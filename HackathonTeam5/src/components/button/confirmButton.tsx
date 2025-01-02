@@ -8,6 +8,7 @@ interface ConfirmButtonProps {
   fontSize: string; // 폰트 크기
   backgroundcolor: string; // 버튼 배경색
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void; // 클릭 핸들러
+  disabled?: boolean;
 }
 
 const ConfirmButton = (props: ConfirmButtonProps) => {
@@ -18,6 +19,7 @@ const ConfirmButton = (props: ConfirmButtonProps) => {
       fontSize={props.fontSize}
       backgroundcolor={props.backgroundcolor}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {props.text}
     </StyledConfirmButton>
