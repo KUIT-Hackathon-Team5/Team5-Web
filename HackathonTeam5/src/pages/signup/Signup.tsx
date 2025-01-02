@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ConfirmButton from "../../components/button/confirmButton";
 import UserInputField from "../../components/userInputField/UserInputField";
-import { SignUpContainer, SignUpForm } from "./signup.styled";
+import { SignUpContainer, SignUpForm } from "./Signup.styled";
 
 const Signup = () => {
   const [email, setEmail] = useState("");

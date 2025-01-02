@@ -1,7 +1,7 @@
 import "./App.css";
 // import Login from "./pages/login/Login";
 // import Onboarding from "./pages/onboarding/Onboarding";
-import Signup from "./pages/signup/signup";
+import Signup from "./pages/signup/Signup";
 
 function App() {
   // return <Login />
