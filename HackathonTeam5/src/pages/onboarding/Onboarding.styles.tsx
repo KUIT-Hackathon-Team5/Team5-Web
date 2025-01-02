@@ -8,6 +8,7 @@ export const OnboardingContainer = styled.div`
     width: 393px;
     height: 853px;
     background-color: #42D596;
+    color: white;
 `
 
 export const OnboardingTitle = styled.div`
