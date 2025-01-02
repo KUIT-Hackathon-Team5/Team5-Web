@@ -13,6 +13,7 @@ export const StyledConfirmButton = styled.button<ButtonProps>`
   color: #ffffff; // 텍스트 색상
   cursor: pointer; // 마우스 포인터
   transition: background-color 0.3s ease, transform 0.2s ease; // 애니메이션
+  font-weight: 500;
 
   width: ${(props) => props.width || "323px"}; // 기본값 설정
   height: ${(props) => props.height || "40px"};

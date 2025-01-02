@@ -41,8 +41,25 @@ const Signup = () => {
     console.log("Password:", password);
   };
 
-  const isButtonDisabled = !email || !authCode || !password || !confirmedPassword || password !== confirmedPassword;
-  const isPasswordConfirmed = password === confirmedPassword
+  const handleSendAuthCode = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("HandleSendAuthCode");
+  };
+
+  const handleConfirmAuthCode = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("HandleConfirmAuthCode");
+  }
+
+  const isSignUpButtonDisabled =
+    !email ||
+    !authCode ||
+    !password ||
+    !confirmedPassword ||
+    password !== confirmedPassword;
+
+  const isSendAuthCodeButtonDisabled = !email
+
 
   return (
     <SignUpContainer>
@@ -56,6 +73,9 @@ const Signup = () => {
           type="email"
           placeholder="건국대학교 이메일을 입력하세요"
           onChange={handleEmailChange}
+          buttonText="인증코드 발급"
+          onButtonClick={handleSendAuthCode}
+          disabled={isSendAuthCodeButtonDisabled}
         />
 
         <UserInputField
@@ -65,6 +85,9 @@ const Signup = () => {
           type="number"
           placeholder="인증번호 입력"
           onChange={handleAuthCodeChange}
+          buttonText="인증확인"
+          onButtonClick={handleConfirmAuthCode}
+          disabled={isSendAuthCodeButtonDisabled}
         />
 
         <UserInputField
@@ -92,7 +115,7 @@ const Signup = () => {
           fontSize="19px"
           backgroundcolor="#42D596"
           onClick={handleSignUp}
-          disabled={isButtonDisabled}
+          disabled={isSignUpButtonDisabled}
         />
       </SignUpForm>
     </SignUpContainer>
