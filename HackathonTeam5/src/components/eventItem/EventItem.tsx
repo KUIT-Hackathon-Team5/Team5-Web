@@ -12,7 +12,12 @@ import {
   EventItemLocation,
 } from "./EventItem.styled";
 
-const EventItem = () => {
+interface EventItemProps {
+    title: string;
+    location: string;
+}
+
+const EventItem = (props: EventItemProps) => {
   const [isLiked, setIsLiked] = useState(false); // 하트 클릭 상태 관리
 
   const handleLikeClick = () => {
@@ -31,8 +36,8 @@ const EventItem = () => {
       </EventItemThumbnailWrapper>
 
       <EventItemInfoContainer>
-        <EventItemTitle>타이틀</EventItemTitle>
-        <EventItemLocation>일시 장소</EventItemLocation>
+        <EventItemTitle>{props.title}</EventItemTitle>
+        <EventItemLocation>{props.location}</EventItemLocation>
       </EventItemInfoContainer>
     </EventItemContainer>
   );
