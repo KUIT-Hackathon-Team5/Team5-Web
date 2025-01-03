@@ -114,6 +114,9 @@ const CreatePost = () => {
   };
 
   const createPostRequest = () => {
+    const jwt = localStorage.getItem("jwt");
+    console.log(jwt);
+
     const data = {
       userId: localStorage.getItem("userId"),
       title: title,
@@ -135,6 +138,7 @@ const CreatePost = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
           },
         }
       )
@@ -142,7 +146,7 @@ const CreatePost = () => {
         console.log(response);
         console.log("Status:", response.data.status);
         console.log("Message:", response.data.message);
-        alert("게시글 업로드 성공!!")
+        alert("게시글 업로드 성공!!");
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {

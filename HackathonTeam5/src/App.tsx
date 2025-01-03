@@ -10,7 +10,7 @@ import "./index.css"
 //import Placeholder from "../src/assets/placeholder_rec.svg"
 
 function App() {
-   return <Router />; // JSX 요소 반환
+   return <Router />; 
   /*
   const imageUrls = [
     Placeholder,
