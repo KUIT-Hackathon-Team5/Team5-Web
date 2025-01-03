@@ -1,5 +1,6 @@
 import "./App.css";
 import Router from "./router/Router";
+import "./index.css"
 // import Login from "./pages/login/Login";
 // import Onboarding from "./pages/onboarding/Onboarding";
 // import Signup from "./pages/signup/Signup";
@@ -9,7 +10,7 @@ import Router from "./router/Router";
 //import Placeholder from "../src/assets/placeholder_rec.svg"
 
 function App() {
-   return <Router />; // JSX 요소 반환
+   return <Router />; 
   /*
   const imageUrls = [
     Placeholder,

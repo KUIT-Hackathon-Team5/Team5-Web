@@ -7,6 +7,7 @@ export const CreatePostContainer = styled.div`
   height: 813px;
   background-color: white;
   position: relative;
+  box-sizing: border-box;
 `;
 
 export const PostContentsContainer = styled.div`
@@ -18,7 +19,7 @@ export const PostContentsContainer = styled.div`
 
 export const UsageGuideContainer = styled.div`
   width: 353px;
-  height: 162px;
+  height: 170px;
   background-color: #e4e4e4;
   border-radius: 8px;
   padding: 10px;
@@ -54,6 +55,16 @@ export const UsageGuideContainer = styled.div`
   }
 `;
 
+export const BtnContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 13px 20px;
+    align-items: center;
+    box-sizing: border-box;
+    width: 393px;
+`
+
 export const UsageGuideConfirmBtnContainer = styled.button`
   background: none;
   border: none;
@@ -62,7 +73,6 @@ export const UsageGuideConfirmBtnContainer = styled.button`
   flex-direction: row;
   align-self: flex-end;
   align-items: center;
-  margin: 13px 20px 13px 0;
   gap: 5px;
 
   & > img {
@@ -72,7 +82,6 @@ export const UsageGuideConfirmBtnContainer = styled.button`
 
   & > div {
     font-size: 14px;
-    
   }
 `;
 
@@ -81,9 +90,44 @@ export const PostInputFieldContainer = styled.div`
   flex-direction: column;
   align-self: center;
   gap: 30px;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 export const ConfirmButtonWrapper = styled.div`
     margin-top: 40px;
 `
+
+
+
+export const ToggleButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ToggleLabel = styled.span`
+  font-size: 14px;
+  margin-right: 10px;
+`;
+
+export const ToggleSwitch = styled.div<{ isOn: boolean }>`
+  width: 40px;
+  height: 15px;
+  background-color: ${(props) => (props.isOn ? "#42D596" : "#ccc")};
+  border-radius: 25px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+`;
+
+export const ToggleThumb = styled.div<{ isOn: boolean }>`
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: ${(props) => (props.isOn ? "calc(100% - 12px)" : "2px")};
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+`;

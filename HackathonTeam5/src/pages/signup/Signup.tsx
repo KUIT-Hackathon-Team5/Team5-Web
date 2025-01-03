@@ -82,7 +82,7 @@ const Signup = () => {
     const data = {
       email: email,
       password: password,
-      name: nickname
+      name: nickname,
     };
 
     axios
@@ -114,41 +114,41 @@ const Signup = () => {
   // 닉네임 중복 확인
   const verifyNickname = () => {
     const data = {
-      "name": nickname
+      name: nickname,
     };
 
     axios
-    .post<RequestAuthCodeResponse>(
-      `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/name`,
-      JSON.stringify(data),
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      }
-    )
-    .then((response) => {
-      console.log(response);
-      console.log("Status:", response.data.status);
-      console.log("Message:", response.data.message);
-    })
-    .catch((error: AxiosError<ErrorResponse>) => {
-      if (error.response) {
-        // 에러 응답이 있는 경우
-        console.error("Error Status:", error.response.data.status);
-        console.error("Error Message:", error.response.data.message);
-        console.error("Error Timestamp:", error.response.data.timestamp);
-      } else {
-        // 기타 에러
-        console.error("Unexpected Error:", error.message);
-      }
-    });
-  }
+      .post<RequestAuthCodeResponse>(
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/name`,
+        JSON.stringify(data),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        console.log("Status:", response.data.status);
+        console.log("Message:", response.data.message);
+      })
+      .catch((error: AxiosError<ErrorResponse>) => {
+        if (error.response) {
+          // 에러 응답이 있는 경우
+          console.error("Error Status:", error.response.data.status);
+          console.error("Error Message:", error.response.data.message);
+          console.error("Error Timestamp:", error.response.data.timestamp);
+        } else {
+          // 기타 에러
+          console.error("Unexpected Error:", error.message);
+        }
+      });
+  };
 
   // 인증번호 요청
   const requestAuthCode = () => {
     const data = {
-      "email": email,
+      email: email,
     };
 
     axios
@@ -157,7 +157,7 @@ const Signup = () => {
         JSON.stringify(data),
         {
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
         }
       )
@@ -207,7 +207,7 @@ const Signup = () => {
   const handleCheckNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("HandleCheckNickname");
-    verifyNickname()
+    verifyNickname();
   };
 
   // 인증번호 발송

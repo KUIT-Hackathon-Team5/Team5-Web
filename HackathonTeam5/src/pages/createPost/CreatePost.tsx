@@ -6,7 +6,12 @@ import {
   UsageGuideContainer,
   PostInputFieldContainer,
   UsageGuideConfirmBtnContainer,
-  ConfirmButtonWrapper
+  ConfirmButtonWrapper,
+  ToggleButtonContainer,
+  ToggleLabel,
+  ToggleSwitch,
+  ToggleThumb,
+  BtnContainer,
 } from "./CreatePost.styled";
 import info from "../../assets/info.png";
 import { useState } from "react";
@@ -15,8 +20,26 @@ import confirmbutton from "../../assets/confirmbutton.png";
 import confirmedbutton from "../../assets/confirmedbutton.png";
 import ConfirmButton from "../../components/button/confirmButton";
 import Homebar from "../../components/homebar/Homebar";
+import axios, { AxiosError } from "axios";
+
+interface CreatePostResponse {
+  status: number; // 응답 상태 코드
+  message: string; // 응답 메시지
+  data: {
+    postId: number; // 사용자 ID
+  };
+  timestamp: number;
+}
+
+interface ErrorResponse {
+  status: number; // HTTP 상태 코드
+  message: string; // 에러 메시지
+  timestamp?: number; // 에러 발생 시간 (선택적)
+}
 
 const CreatePost = () => {
+  const [isOn, setIsOn] = useState(true);
+  const [category, setCategory] = useState<string>("동아리");
   const [type, setType] = useState("");
   const [title, setTitle] = useState("");
   const [organization, setOrganization] = useState("");
@@ -26,6 +49,11 @@ const CreatePost = () => {
   const [postInfo, setPostInfo] = useState("");
   const [usageGuideConfirmed, setUsageGuideConfirmed] =
     useState<boolean>(false);
+
+  const handleToggle = () => {
+    setIsOn((prev) => !prev);
+    setCategory((prev) => (prev === "동아리" ? "단과대" : "동아리"));
+  };
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setType(e.target.value);
@@ -69,11 +97,6 @@ const CreatePost = () => {
     setUsageGuideConfirmed((prev) => !prev);
   };
 
-  const uploadPost = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log("uploadPost")
-  };
-
   const uploadButtonDisabled =
     !type ||
     !title ||
@@ -83,6 +106,60 @@ const CreatePost = () => {
     !location ||
     !postInfo ||
     !usageGuideConfirmed;
+
+  const uploadPost = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("handleCreatePost");
+    createPostRequest();
+  };
+
+  const createPostRequest = () => {
+    const jwt = localStorage.getItem("jwt");
+    console.log(jwt);
+
+    const data = {
+      userId: localStorage.getItem("userId"),
+      title: title,
+      contents: postInfo,
+      organizer: organization,
+      organizer_link: "",
+      place: location,
+      photo: "",
+      type: type,
+      category: category,
+      startTime: startSchedule,
+      endTime: endSchedule,
+    };
+
+    axios
+      .post<CreatePostResponse>(
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/posts`,
+        JSON.stringify(data),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${jwt}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        console.log("Status:", response.data.status);
+        console.log("Message:", response.data.message);
+        alert("게시글 업로드 성공!!");
+      })
+      .catch((error: AxiosError<ErrorResponse>) => {
+        if (error.response) {
+          // 에러 응답이 있는 경우
+          console.error("Error Status:", error.response.data.status);
+          console.error("Error Message:", error.response.data.message);
+          console.error("Error Timestamp:", error.response.data.timestamp);
+        } else {
+          // 기타 에러
+          console.error("Unexpected Error:", error.message);
+        }
+      });
+  };
 
   return (
     <CreatePostContainer>
@@ -111,14 +188,23 @@ const CreatePost = () => {
           </div>
         </UsageGuideContainer>
 
-        <UsageGuideConfirmBtnContainer onClick={handleUsageGuideButton}>
-          {usageGuideConfirmed ? (
-            <img src={confirmedbutton} alt="" />
-          ) : (
-            <img src={confirmbutton} alt="" />
-          )}
-          <div>확인했습니다.</div>
-        </UsageGuideConfirmBtnContainer>
+        <BtnContainer>
+          <ToggleButtonContainer>
+            <ToggleLabel>{category}</ToggleLabel>
+            <ToggleSwitch isOn={isOn} onClick={handleToggle}>
+              <ToggleThumb isOn={isOn} />
+            </ToggleSwitch>
+          </ToggleButtonContainer>
+
+          <UsageGuideConfirmBtnContainer onClick={handleUsageGuideButton}>
+            {usageGuideConfirmed ? (
+              <img src={confirmedbutton} alt="" />
+            ) : (
+              <img src={confirmbutton} alt="" />
+            )}
+            <div>확인했습니다.</div>
+          </UsageGuideConfirmBtnContainer>
+        </BtnContainer>
 
         <PostInputFieldContainer>
           <PostInputField
@@ -126,7 +212,7 @@ const CreatePost = () => {
             id="type"
             label="분야"
             value={type}
-            placeholder=" 이벤트 종류"
+            placeholder="이벤트/부원 모집/정기 행사/공연 및 전시/홍보"
             onChange={handleTypeChange}
             width="300px"
             height="20px"
@@ -194,15 +280,15 @@ const CreatePost = () => {
         </PostInputFieldContainer>
 
         <ConfirmButtonWrapper>
-            <ConfirmButton
-                text="업로드 하기"
-                width="333px"
-                height="50px"
-                fontSize="20px"
-                backgroundcolor="#42D596"
-                onClick={uploadPost}
-                disabled={uploadButtonDisabled}
-            />
+          <ConfirmButton
+            text="업로드 하기"
+            width="333px"
+            height="50px"
+            fontSize="20px"
+            backgroundcolor="#42D596"
+            onClick={uploadPost}
+            disabled={uploadButtonDisabled}
+          />
         </ConfirmButtonWrapper>
       </PostContentsContainer>
       <Homebar></Homebar>
