@@ -31,6 +31,7 @@ export const PopularEventsContainer = styled.div`
   align-self: flex-start;
   margin-left: 20px;
   margin-top: 10px;
+  width: 100%; 
 
   & > p {
     font-weight: 600;
@@ -44,6 +45,7 @@ export const PopularEventsList = styled.div`
 
   overflow-y: hidden;
   overflow-x: auto;
+  width: 100%;
 
   ::-webkit-scrollbar {
     display: none;
