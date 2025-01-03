@@ -7,7 +7,6 @@ export const HomeContainer = styled.div`
   align-items: center; // 자식 요소를 수평 중앙 정렬
   width: 393px;
   height: 853px;
-  border: 1px solid #42d596;
   overflow-y: auto; // 세로 스크롤 활성화
   overflow-x: hidden; // 가로 스크롤 숨김
   box-sizing: border-box;
@@ -84,7 +83,7 @@ export const ListContainer = styled.div`
 `;
 
 export const ConfirmButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 70px;
+  position: sticky;
+  bottom: 25px;
   z-index: 1000; // 다른 요소 위로 띄움
 `;

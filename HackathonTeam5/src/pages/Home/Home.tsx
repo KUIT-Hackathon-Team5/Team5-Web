@@ -73,7 +73,6 @@ const Home = () => {
       </ConfirmButtonWrapper>
 
       <Homebar 
-      bgColor="white"
       isSticky={true}
       />
     </HomeContainer>
