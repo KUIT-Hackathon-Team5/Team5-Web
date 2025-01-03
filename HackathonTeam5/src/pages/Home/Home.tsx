@@ -13,10 +13,14 @@ import AppTitle from "../../components/title/AppTitle";
 import ConfirmButton from "../../components/button/confirmButton";
 import arrowDown from '../../assets/chevron-down.png'
 import Statusbar from "../../components/statusbar/Statusbar";
+import Homebar from "../../components/homebar/Homebar";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate(); // useNavigate 훅 사용
   const handleCreatePost = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    navigate("/createpost"); // 페이지 이동
     console.log("게시물 작성하기");
   };
 
@@ -68,7 +72,10 @@ const Home = () => {
         />
       </ConfirmButtonWrapper>
 
-      {/* <Homebar></Homebar> */}
+      <Homebar 
+      bgColor="white"
+      isSticky={true}
+      />
     </HomeContainer>
   );
 };

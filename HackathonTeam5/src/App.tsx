@@ -1,13 +1,15 @@
 import "./App.css";
+import Router from "./router/Router";
 // import Login from "./pages/login/Login";
 // import Onboarding from "./pages/onboarding/Onboarding";
 // import Signup from "./pages/signup/Signup";
 //import Home from "./pages/Home/Home";
-import PostDetail from "./pages/postdetail/PostDetail";
+//import PostDetail from "./pages/postdetail/PostDetail";
 //import Reaction from "./pages/reaction/Reaction";
-import Placeholder from "../src/assets/placeholder_rec.svg"
+//import Placeholder from "../src/assets/placeholder_rec.svg"
 function App() {
-  
+   return <Router />; // JSX 요소 반환
+  /*
   const imageUrls = [
     Placeholder,
     Placeholder,
@@ -26,6 +28,7 @@ function App() {
   images={imageUrls}  // 이미지 URL 배열 전달
   organizer_link="https://www.instagram.com/imxxstar?igsh=a2Y1Y2tpZmVmNmZ0"
 />
+*/
 }
 
 export default App;

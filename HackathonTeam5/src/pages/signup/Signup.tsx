@@ -4,7 +4,7 @@ import UserInputField from "../../components/userInputField/UserInputField";
 import { SignUpContainer, SignUpForm } from "./Signup.styled";
 import Statusbar from "../../components/statusbar/Statusbar";
 import axios, { AxiosError } from "axios";
-
+import Homebar from "../../components/homebar/Homebar";
 // 회원가입 버튼 눌렀을 때
 interface UserRegisterResponse {
   status: number; // 응답 상태 코드
@@ -245,6 +245,7 @@ const Signup = () => {
           disabled={isSignUpButtonDisabled}
         />
       </SignUpForm>
+      <Homebar />
     </SignUpContainer>
   );
 };
