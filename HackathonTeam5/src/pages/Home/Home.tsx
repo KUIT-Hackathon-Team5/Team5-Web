@@ -80,7 +80,7 @@ const Home = () => {
 
     axios
       .get<GetPostResponse>(
-        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/posts?category=${category}&order=0`,
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/posts/view?category=${category}&order=0`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -135,9 +135,18 @@ const Home = () => {
       <PopularEventsContainer>
         <p>인기 동아리 이벤트</p>
         <PopularEventsList>
-          {[...Array(3)].map((_, index) => (
-            <EventItem key={index} />
-          ))}
+          {postResponse?.popularPosts &&
+          postResponse.popularPosts.length > 0 ? (
+            postResponse.popularPosts.map((post) => (
+              <EventItem
+                key={post.postId}
+                title={post.title}
+                location={post.place}
+              />
+            ))
+          ) : (
+            <p>현재 인기 이벤트가 없습니다.</p>
+          )}
         </PopularEventsList>
       </PopularEventsContainer>
 

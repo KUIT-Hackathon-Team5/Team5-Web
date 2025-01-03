@@ -13,6 +13,7 @@ import thumbnail from "../../assets/thumbnail.png"
 import heart from "../../assets/heart.png"
 import heartFilled from "../../assets/heart-filled.svg"; // 채워진 하트 이미지 추가
 interface PostItemProps {
+  // onClick: (e: React.MouseEvent<HTMLButtonElement>) => void; // 클릭 핸들러
   thumbnail: string;
   category: string;
   title: string;
