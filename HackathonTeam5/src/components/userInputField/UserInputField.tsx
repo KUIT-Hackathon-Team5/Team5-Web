@@ -17,6 +17,8 @@ interface UserInputFieldProps {
   buttonText?: string;
   onButtonClick?: (e: React.MouseEvent<HTMLButtonElement>) => void; // 클릭 핸들러
   disabled?: boolean;
+  width?: string;
+  height?: string;
 }
 
 const UserInputField = (props: UserInputFieldProps) => {
@@ -25,6 +27,8 @@ const UserInputField = (props: UserInputFieldProps) => {
       <UserInputLabel htmlFor={props.id}>{props.label}</UserInputLabel>
       <InputWrapper>
         <UserInput
+          width={props.width}
+          height={props.height}
           type={props.type}
           id={props.id}
           value={props.value}

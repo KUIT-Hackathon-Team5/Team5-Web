@@ -6,14 +6,15 @@ export const LoginContainer = styled.div`
     align-items: center; // 자식 요소를 수평 중앙 정렬 
     width: 393px;
     height: 853px;
-    background-color: #f3f3f3;
+    border: 1px solid #42D596;
+    position: relative;
 `
 
 export const LoginTitle = styled.div`
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 144px;
+    margin-top: 154px;
     margin-bottom: 100px;
+    width: 153px;
+    height: 37px;
 `
 
 export const LoginForm = styled.form`

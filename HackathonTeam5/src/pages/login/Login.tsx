@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import UserInputField from "../../components/userInputField/UserInputField";
-import { LoginContainer, LoginTitle, LoginForm, SignInDiv } from "./Login.styled";
+import {
+  LoginContainer,
+  LoginTitle,
+  LoginForm,
+  SignInDiv,
+} from "./Login.styled";
 import ConfirmButton from "../../components/button/confirmButton";
+import kuzone from "../../assets/kuzone.png";
+import Statusbar from "../../components/statusbar/Statusbar";
+import Homebar from "../../components/homebar/Homebar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,12 +33,15 @@ const Login = () => {
     console.log("Email:", email);
     console.log("Password:", password);
   };
-  
-  const isButtonDisabled = !email || !password
+
+  // const isButtonDisabled = !email || !password
 
   return (
     <LoginContainer>
-      <LoginTitle>KU:ZONE</LoginTitle>
+      <Statusbar/>
+      <LoginTitle>
+        <img src={kuzone} alt="app title" />
+      </LoginTitle>
       <LoginForm>
         <UserInputField
           label="이메일"
@@ -57,11 +68,11 @@ const Login = () => {
           fontSize="19px"
           backgroundcolor="#42D596"
           onClick={handleLogin}
-          disabled={isButtonDisabled}
         />
       </LoginForm>
 
       <SignInDiv>회원가입</SignInDiv>
+      <Homebar />
     </LoginContainer>
   );
 };

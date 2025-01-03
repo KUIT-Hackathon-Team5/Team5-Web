@@ -4,8 +4,6 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f3f3f3;
-  display: flex;
-  flex-direction: column;
   align-items: center; // 자식 요소를 수평 중앙 정렬
   width: 393px;
   height: 853px;
@@ -13,6 +11,7 @@ export const HomeContainer = styled.div`
   overflow-y: auto; // 세로 스크롤 활성화
   overflow-x: hidden; // 가로 스크롤 숨김
   box-sizing: border-box;
+  position: relative;
 
   /* 스크롤바 스타일 숨기기 */
   ::-webkit-scrollbar {
@@ -30,6 +29,7 @@ export const PopularEventsContainer = styled.div`
   align-self: flex-start;
   margin-left: 20px;
   margin-top: 10px;
+  width: 100%; 
 
   & > p {
     font-weight: 600;
@@ -43,6 +43,7 @@ export const PopularEventsList = styled.div`
 
   overflow-y: hidden;
   overflow-x: auto;
+  width: 100%;
 
   ::-webkit-scrollbar {
     display: none;

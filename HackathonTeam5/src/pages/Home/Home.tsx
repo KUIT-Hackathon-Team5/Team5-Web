@@ -12,6 +12,7 @@ import EventItem from "../../components/eventItem/EventItem";
 import AppTitle from "../../components/title/AppTitle";
 import ConfirmButton from "../../components/button/confirmButton";
 import arrowDown from '../../assets/chevron-down.png'
+import Statusbar from "../../components/statusbar/Statusbar";
 
 const Home = () => {
   const handleCreatePost = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,6 +22,7 @@ const Home = () => {
 
   return (
     <HomeContainer>
+      <Statusbar />
       <AppTitle />
 
       <HomeCategoryBar></HomeCategoryBar>
