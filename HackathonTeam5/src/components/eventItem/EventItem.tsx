@@ -1,5 +1,5 @@
 import { useState } from "react";
-import thumbnail from "../../assets/thumbnail.png";
+import thumbnail from "../../assets/hackathon2.png";
 import heart from "../../assets/heart.png";
 import heartFilled from "../../assets/heart-filled.svg"; // 채워진 하트 이미지 추가
 import {
@@ -11,8 +11,6 @@ import {
   EventItemTitle,
   EventItemLocation,
 } from "./EventItem.styled";
-
-
 
 const EventItem = () => {
   const [isLiked, setIsLiked] = useState(false); // 하트 클릭 상태 관리
