@@ -77,7 +77,7 @@ const Signup = () => {
 
     axios
       .post<UserRegisterResponse>(
-        "http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/register",
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/register`,
         data
       )
       .then((response) => {
@@ -101,9 +101,14 @@ const Signup = () => {
 
   // 인증번호 요청
   const requestAuthCode = () => {
+    const data = {
+      email: email,
+    };  
+
     axios
       .post<RequestAuthCodeResponse>(
-        "http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/verification-requests?email=${encodeURIComponent(email)}"
+        `/users/emails/verification-requests`,
+        data
       )
       .then((response) => {
         console.log(response);
@@ -127,24 +132,25 @@ const Signup = () => {
   const verifyAuthCode = () => {
     const endpoint = `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/emails/vertifications`;
 
-    axios.get<VerifyAuthCodeResponse>(
-      `${endpoint}?email=${encodeURIComponent(email)}&code=${encodeURIComponent(authCode)}`
-    )
-    .then((response) => {
-      console.log("Response:", response.data);
-      console.log("Status:", response.data.status);
-      console.log("Message:", response.data.message);
-      console.log("Verified:", response.data.data.verified);
-    })
-    .catch((error: AxiosError<ErrorResponse>) => {
-      if (error.response) {
-        console.error("Error Status:", error.response.data.status);
-        console.error("Error Message:", error.response.data.message);
-        console.error("Error Timestamp:", error.response.data.timestamp);
-      } else {
-        console.error("Unexpected Error:", error.message);
-      }
-    });
+    axios
+      .get<VerifyAuthCodeResponse>(
+        `${endpoint}?email=${encodeURIComponent(email)}&code=${encodeURIComponent(authCode)}`
+      )
+      .then((response) => {
+        console.log("Response:", response.data);
+        console.log("Status:", response.data.status);
+        console.log("Message:", response.data.message);
+        console.log("Verified:", response.data.data.verified);
+      })
+      .catch((error: AxiosError<ErrorResponse>) => {
+        if (error.response) {
+          console.error("Error Status:", error.response.data.status);
+          console.error("Error Message:", error.response.data.message);
+          console.error("Error Timestamp:", error.response.data.timestamp);
+        } else {
+          console.error("Unexpected Error:", error.message);
+        }
+      });
   };
 
   /// 버튼의 onClick에 넘길 메서드들
@@ -159,7 +165,7 @@ const Signup = () => {
   const handleConfirmAuthCode = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("HandleConfirmAuthCode");
-    verifyAuthCode()
+    verifyAuthCode();
   };
 
   // 회원가입 요청

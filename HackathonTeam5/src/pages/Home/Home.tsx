@@ -67,6 +67,8 @@ const Home = () => {
           onClick={handleCreatePost}
         />
       </ConfirmButtonWrapper>
+
+      {/* <Homebar></Homebar> */}
     </HomeContainer>
   );
 };
