@@ -61,7 +61,6 @@ const Signup = () => {
 
   const isSendAuthCodeButtonDisabled = !email
 
-
   return (
     <SignUpContainer>
       <Statusbar></Statusbar>
