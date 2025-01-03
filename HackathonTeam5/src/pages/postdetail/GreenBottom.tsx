@@ -2,15 +2,15 @@ import React from 'react';
 import { StyledDiv } from './GreenBottom.styles';
 import Bird from "../../assets/bird.svg";
 
-const GreenBottom = () => {
-  const handleClick = () => {
-    // 버튼 클릭 시 동작할 코드 (예: 다른 페이지로 이동 등)
-    console.log("버튼 클릭됨!");
-  };
+// GreenBottom 컴포넌트에서 onClick 함수를 props로 받아옴
+interface GreenBottomProps {
+  onClick: () => void;  // 클릭 시 실행할 함수 타입 정의
+}
 
+const GreenBottom: React.FC<GreenBottomProps> = ({ onClick }) => {
   return (
     <StyledDiv>
-      <button className="container" onClick={handleClick}>
+      <button className="container" onClick={onClick}>
         <img src={Bird} alt="새" />
         <p>반응 둘러보기</p>
       </button>

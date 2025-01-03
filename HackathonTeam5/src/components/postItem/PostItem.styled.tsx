@@ -8,6 +8,7 @@ export const PostItemContainer = styled.div`
     background-color: white;
     border-radius: 10px;
     box-sizing: border-box;
+    cursor: pointer;
 `
 
 export const PostItemThumbnail = styled.img`

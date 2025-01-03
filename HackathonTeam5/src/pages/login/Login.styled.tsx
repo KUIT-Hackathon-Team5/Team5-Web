@@ -31,5 +31,5 @@ export const SignInDiv = styled.div`
     font-size: 14px;
     margin-top: 59px;
     text-decoration: underline;
-
+   cursor: pointer;
 `
