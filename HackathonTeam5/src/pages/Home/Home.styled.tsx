@@ -106,7 +106,7 @@ export const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 80px;
+  margin-bottom: 10px;
 `;
 
 export const ConfirmButtonWrapper = styled.div`

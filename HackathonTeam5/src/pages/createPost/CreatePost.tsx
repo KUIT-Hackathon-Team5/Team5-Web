@@ -116,6 +116,7 @@ const CreatePost = () => {
   const createPostRequest = () => {
     const jwt = localStorage.getItem("jwt");
     console.log(jwt);
+    console.log(localStorage.getItem("userId"))
 
     const data = {
       userId: localStorage.getItem("userId"),
@@ -138,7 +139,7 @@ const CreatePost = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${jwt}`,
+            // "Authorization": `Bearer ${jwt}`,
           },
         }
       )
@@ -212,7 +213,7 @@ const CreatePost = () => {
             id="type"
             label="분야"
             value={type}
-            placeholder="이벤트/부원 모집/정기 행사/공연 및 전시/홍보"
+            placeholder="이벤트/부원모집/정기행사/공연 및 전시/홍보"
             onChange={handleTypeChange}
             width="300px"
             height="20px"

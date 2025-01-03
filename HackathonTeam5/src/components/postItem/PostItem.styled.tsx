@@ -54,6 +54,11 @@ export const PostScheduleInfo = styled.div`
         font-size: 12px;
         color: #555555;
     }
+
+    & > span {
+        font-size: 12px;
+        color: #555555;
+    }
 `
 
 export const PostBody = styled.div`

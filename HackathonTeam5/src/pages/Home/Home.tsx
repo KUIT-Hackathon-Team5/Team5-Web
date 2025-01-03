@@ -18,7 +18,7 @@ import Homebar from "../../components/homebar/Homebar";
 import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 // Post 인터페이스
 interface Post {
@@ -76,15 +76,15 @@ const Home = () => {
   };
 
   const GetPostRequest = () => {
-    const jwt = localStorage.getItem("jwt");
+    // const jwt = localStorage.getItem("jwt");
 
     axios
       .get<GetPostResponse>(
-        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/posts?category={category}&order={0}`,
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/posts?category=${category}&order=0`,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${jwt}`,
+            // Authorization: `Bearer ${jwt}`,
           },
         }
       )
@@ -93,7 +93,7 @@ const Home = () => {
         console.log("Status:", response.data.status);
         console.log("Message:", response.data.message);
         setPostResponse(response.data.data);
-        alert("게시글 조회 성공!!");
+        // alert("게시글 조회 성공!!");
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
@@ -110,7 +110,7 @@ const Home = () => {
 
   useEffect(() => {
     GetPostRequest();
-  }, []);
+  }, [category]);
 
   return (
     <HomeContainer>
@@ -136,9 +136,7 @@ const Home = () => {
         <p>인기 동아리 이벤트</p>
         <PopularEventsList>
           {[...Array(3)].map((_, index) => (
-            <EventItem 
-              key={index}
-            />
+            <EventItem key={index} />
           ))}
         </PopularEventsList>
       </PopularEventsContainer>
@@ -149,15 +147,15 @@ const Home = () => {
       </FilterButton>
 
       <ListContainer>
-        {[...Array(10)].map((_, index) => (
+        {postResponse?.posts.map((post) => (
           <PostItem
-            key={index}
-            thumbnail="thumbnail"
-            category="스포츠"
-            title="연극 동아리 공연합니다! 많은 참여 부탁드려요!"
-            time="2025.03.10"
-            location="건국대학교 공연홀"
-            body="KU 연극 동아리에서 준비한 특별 공연! 이번 주제는 건국대학교 연극입니다!"
+            key={post.postId} // 고유한 key로 postId 사용
+            thumbnail="thumbnail" // 적절한 값을 전달해야 함
+            category={post.type}
+            title={post.title}
+            time={new Date(post.startTime).toLocaleDateString()} // ISO 날짜를 로컬 날짜 형식으로 변환
+            location={post.place}
+            body={post.contents}
           />
         ))}
       </ListContainer>

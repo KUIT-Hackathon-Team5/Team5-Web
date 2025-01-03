@@ -38,7 +38,7 @@ const PostItem = (props: PostItemProps) => {
         </PostTitle>
         <PostScheduleInfo>
             <div>{props.time}</div>
-            <div>" | "</div>
+            <span>&nbsp;|&nbsp;</span>
             <div>{props.location}</div>
         </PostScheduleInfo>
         <PostBody>
