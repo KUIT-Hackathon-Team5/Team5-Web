@@ -9,7 +9,7 @@ export const SignUpContainer = styled.div`
   /* border: 1px solid #42D596; */
   background-color: white;
   position: relative;
-
+  
   & > h2 {
     font-weight: bold;
     font-size: 20px;
