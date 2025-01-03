@@ -4,6 +4,7 @@ import UserInputField from "../../components/userInputField/UserInputField";
 import { SignUpContainer, SignUpForm } from "./Signup.styled";
 import Statusbar from "../../components/statusbar/Statusbar";
 import axios, { AxiosError } from "axios";
+import Homebar from "../../components/homebar/Homebar";
 
 // 회원가입 버튼 눌렀을 때
 interface UserRegisterResponse {
@@ -39,10 +40,17 @@ interface ErrorResponse {
 }
 
 const Signup = () => {
+  const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [authCode, setAuthCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
+
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newNickname = e.target.value;
+    setNickname(newNickname);
+    console.log("닉네임:", newNickname);
+  };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
@@ -73,6 +81,7 @@ const Signup = () => {
     const data = {
       email: email,
       password: password,
+      name: nickname
     };
 
     axios
@@ -85,6 +94,7 @@ const Signup = () => {
         console.log("Status:", response.data.status);
         console.log("Message:", response.data.message);
         console.log("User ID:", response.data.data.userId);
+        alert("회원가입 성공!!!!!!!!")
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
@@ -99,16 +109,55 @@ const Signup = () => {
       });
   };
 
+  // 닉네임 중복 확인
+  const verifyNickname = () => {
+    const data = {
+      "name": nickname
+    };
+
+    axios
+    .post<RequestAuthCodeResponse>(
+      `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/name`,
+      JSON.stringify(data),
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }
+    )
+    .then((response) => {
+      console.log(response);
+      console.log("Status:", response.data.status);
+      console.log("Message:", response.data.message);
+    })
+    .catch((error: AxiosError<ErrorResponse>) => {
+      if (error.response) {
+        // 에러 응답이 있는 경우
+        console.error("Error Status:", error.response.data.status);
+        console.error("Error Message:", error.response.data.message);
+        console.error("Error Timestamp:", error.response.data.timestamp);
+      } else {
+        // 기타 에러
+        console.error("Unexpected Error:", error.message);
+      }
+    });
+  }
+
   // 인증번호 요청
   const requestAuthCode = () => {
     const data = {
-      email: email,
-    };  
+      "email": email,
+    };
 
     axios
       .post<RequestAuthCodeResponse>(
-        `/users/emails/verification-requests`,
-        data
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/emails/verification-requests`,
+        JSON.stringify(data),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        }
       )
       .then((response) => {
         console.log(response);
@@ -130,11 +179,9 @@ const Signup = () => {
 
   // 인증번호 확인
   const verifyAuthCode = () => {
-    const endpoint = `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/emails/vertifications`;
-
     axios
       .get<VerifyAuthCodeResponse>(
-        `${endpoint}?email=${encodeURIComponent(email)}&code=${encodeURIComponent(authCode)}`
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/emails/verifications?email=${encodeURIComponent(email)}&code=${encodeURIComponent(authCode)}`
       )
       .then((response) => {
         console.log("Response:", response.data);
@@ -154,6 +201,13 @@ const Signup = () => {
   };
 
   /// 버튼의 onClick에 넘길 메서드들
+  // 닉네임 중복확인
+  const handleCheckNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("HandleCheckNickname");
+    verifyNickname()
+  };
+
   // 인증번호 발송
   const handleSendAuthCode = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -178,14 +232,25 @@ const Signup = () => {
     axios_register();
   };
 
+  const isPasswordValid = (password: string): boolean => {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+    return regex.test(password);
+  };
+
   const isSignUpButtonDisabled =
     !email ||
     !authCode ||
-    !password ||
-    !confirmedPassword ||
+    !isPasswordValid(password) ||
+    !isPasswordValid(confirmedPassword) ||
     password !== confirmedPassword;
-
   const isSendAuthCodeButtonDisabled = !email;
+  const isCheckAuthCodeButtonDisabled = !authCode;
+
+  const isNicknameValid = (nickname: string): boolean => {
+    const regex = /^[가-힣]{4,12}$/;
+    return regex.test(nickname);
+  };
+  const isNicknameCheckButtonDisabled = !isNicknameValid(nickname);
 
   return (
     <SignUpContainer>
@@ -193,6 +258,18 @@ const Signup = () => {
       <h2>회원가입</h2>
 
       <SignUpForm>
+        <UserInputField
+          label="닉네임"
+          value={nickname}
+          id="text"
+          type="text"
+          placeholder="4-12자 사이의 한글 닉네임"
+          onChange={handleNicknameChange}
+          buttonText="중복확인"
+          onButtonClick={handleCheckNickname}
+          disabled={isNicknameCheckButtonDisabled}
+        />
+
         <UserInputField
           label="이메일"
           value={email}
@@ -214,7 +291,7 @@ const Signup = () => {
           onChange={handleAuthCodeChange}
           buttonText="인증확인"
           onButtonClick={handleConfirmAuthCode}
-          disabled={isSendAuthCodeButtonDisabled}
+          disabled={isCheckAuthCodeButtonDisabled}
         />
 
         <UserInputField
@@ -245,6 +322,7 @@ const Signup = () => {
           disabled={isSignUpButtonDisabled}
         />
       </SignUpForm>
+      <Homebar />
     </SignUpContainer>
   );
 };

@@ -10,10 +10,61 @@ import ConfirmButton from "../../components/button/confirmButton";
 import kuzone from "../../assets/kuzone.png";
 import Statusbar from "../../components/statusbar/Statusbar";
 import Homebar from "../../components/homebar/Homebar";
+import axios, { AxiosError } from "axios";
+
+interface LoginResponse {
+  status: number;
+  message: string;
+  data: {
+    token: string;
+    userId: string;
+  }
+  timestamp: number;
+}
+
+interface ErrorResponse {
+  status: number; // HTTP 상태 코드
+  message: string; // 에러 메시지
+  timestamp: number; // 에러 발생 시간 (밀리초)
+}
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const requestLogin = () => {
+    const data = {
+      "email": email,
+      "password": password
+    }
+
+    axios
+      .post<LoginResponse>(
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/login`,
+        JSON.stringify(data),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        console.log("Status:", response.data.status);
+        console.log("Message:", response.data.message);
+      })
+      .catch((error: AxiosError<ErrorResponse>) => {
+        if (error.response) {
+          // 에러 응답이 있는 경우
+          console.error("Error Status:", error.response.data.status);
+          console.error("Error Message:", error.response.data.message);
+          console.error("Error Timestamp:", error.response.data.timestamp);
+        } else {
+          // 기타 에러
+          console.error("Unexpected Error:", error.message);
+        }
+      });
+  }
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
@@ -32,7 +83,10 @@ const Login = () => {
     console.log("Login Attempted with:");
     console.log("Email:", email);
     console.log("Password:", password);
+    requestLogin()
   };
+
+
 
   // const isButtonDisabled = !email || !password
 
