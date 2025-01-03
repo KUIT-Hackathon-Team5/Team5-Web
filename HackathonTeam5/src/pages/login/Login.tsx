@@ -52,6 +52,11 @@ const Login = () => {
         console.log(response);
         console.log("Status:", response.data.status);
         console.log("Message:", response.data.message);
+        console.log("jwt:", response.data.data.token);
+        console.log("userId:", response.data.data.userId);
+        localStorage.setItem('jwt', response.data.data.token); // 또는 sessionStorage.setItem('jwt', jwt);
+        localStorage.setItem('userId', response.data.data.userId);
+        alert("로그인도 성공!!!!!!!!")
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {

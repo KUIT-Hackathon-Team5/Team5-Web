@@ -11,7 +11,7 @@ export const LoginContainer = styled.div`
 `
 
 export const LoginTitle = styled.div`
-    margin-top: 154px;
+    margin-top: 104px;
     margin-bottom: 100px;
     width: 153px;
     height: 37px;
