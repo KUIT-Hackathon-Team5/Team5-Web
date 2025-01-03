@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const EventItemContainer = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 export const EventItemThumbnailWrapper = styled.div`

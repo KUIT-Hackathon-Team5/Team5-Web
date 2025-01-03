@@ -11,6 +11,7 @@ import kuzone from "../../assets/kuzone.png";
 import Statusbar from "../../components/statusbar/Statusbar";
 import Homebar from "../../components/homebar/Homebar";
 import axios, { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";  // useNavigate 훅을 임포트
 
 interface LoginResponse {
   status: number;
@@ -31,7 +32,7 @@ interface ErrorResponse {
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();  // navigate 훅을 사용하여 페이지 이동
   const requestLogin = () => {
     const data = {
       "email": email,
@@ -56,7 +57,14 @@ const Login = () => {
         console.log("userId:", response.data.data.userId);
         localStorage.setItem('jwt', response.data.data.token); // 또는 sessionStorage.setItem('jwt', jwt);
         localStorage.setItem('userId', response.data.data.userId);
-        alert("로그인도 성공!!!!!!!!")
+        
+        // 로그인 성공 시 status가 200일 때만 이동
+        if (response.data.status === 200) {
+          localStorage.setItem('jwt', response.data.data.token); // 또는 sessionStorage.setItem('jwt', jwt);
+          localStorage.setItem('userId', response.data.data.userId);
+          alert("로그인 성공!");
+          navigate("/");  // 로그인 성공 후 "/"로 이동
+        }
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
@@ -91,7 +99,10 @@ const Login = () => {
     requestLogin()
   };
 
-
+  // 회원가입 클릭 시 /signup으로 이동하는 함수
+  const handleSignUpClick = () => {
+    navigate("/signup");
+  };
 
   // const isButtonDisabled = !email || !password
 
@@ -130,7 +141,7 @@ const Login = () => {
         />
       </LoginForm>
 
-      <SignInDiv>회원가입</SignInDiv>
+      <SignInDiv onClick={handleSignUpClick}>회원가입</SignInDiv>
       <Homebar />
     </LoginContainer>
   );

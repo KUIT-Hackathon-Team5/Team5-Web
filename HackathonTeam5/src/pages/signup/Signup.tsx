@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ConfirmButton from "../../components/button/confirmButton";
 import UserInputField from "../../components/userInputField/UserInputField";
 import { SignUpContainer, SignUpForm } from "./Signup.styled";
@@ -45,7 +46,7 @@ const Signup = () => {
   const [authCode, setAuthCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
-
+  const navigate = useNavigate(); // useNavigate 훅 추가
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newNickname = e.target.value;
     setNickname(newNickname);
@@ -94,7 +95,8 @@ const Signup = () => {
         console.log("Status:", response.data.status);
         console.log("Message:", response.data.message);
         console.log("User ID:", response.data.data.userId);
-        alert("회원가입 성공!!!!!!!!")
+        window.alert("회원가입 성공!");
+        navigate("/login");
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
