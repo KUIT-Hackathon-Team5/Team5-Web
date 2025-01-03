@@ -34,7 +34,7 @@ const Home = () => {
       <PopularEventsContainer>
         <p>인기 동아리 이벤트</p>
         <PopularEventsList>
-          {[...Array(10)].map((_, index) => (
+          {[...Array(3)].map((_, index) => (
             <EventItem 
               key={index}
             />

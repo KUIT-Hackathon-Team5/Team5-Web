@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'; // 추가: 페이지 이동을 위한 useNavigat
 import Statusbar from '../../components/statusbar/Statusbar'
 import AppTitle from '../../components/title/AppTitle'
 import { CategoryTitle, FestivalName, Information } from './PostDetail.styles'
@@ -19,6 +20,7 @@ interface PostDetailProps {
   contents: string;         // "내용입력"
   organizer_link?: string;
   images?: string[];    // 이미지 URL 배열 (선택적)
+  postId: number;       // 게시물 고유 ID
 }
 
 const PostDetail: React.FC<PostDetailProps> = ({
@@ -31,9 +33,10 @@ const PostDetail: React.FC<PostDetailProps> = ({
     place,
     contents,
     organizer_link,
-    images = []  // 기본값은 빈 배열로 설정
+    images = [],  // 기본값은 빈 배열로 설정
+    postId         // 추가된 prop
 }) => {
-
+    const navigate = useNavigate();  // useNavigate를 이용한 페이지 이동 함수
     // 동아리 바로가기 버튼 클릭 시 링크로 이동하는 함수
     const handleOrganizerLinkClick = () => {
         if (organizer_link) {
@@ -41,6 +44,10 @@ const PostDetail: React.FC<PostDetailProps> = ({
         }
     };
 
+    // GreenBottom 클릭 시 Reaction 페이지로 이동
+    const handleGreenBottomClick = () => {
+        navigate(`/posts/${postId}/reaction`);  // postId를 URL에 포함시켜 이동
+    };
     return (
     <>
         <Statusbar />
@@ -97,7 +104,7 @@ const PostDetail: React.FC<PostDetailProps> = ({
             ))}
             </div>
         </div>
-        <GreenBottom />
+        <GreenBottom onClick={handleGreenBottomClick}/>
         <Homebar bgColor='#42D596' />
         </Information>
     </>

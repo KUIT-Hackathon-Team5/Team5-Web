@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+    left: -7px;
     position: relative;
     width: 393px;
     height: 723.5px;
     flex-shrink: 0;
     border-radius: 20px 20px 0px 0px;
-    
+    background-color: white;
+    z-index: 2;
     .InputBar_container {
         position: absolute;
         bottom: 27.5px;

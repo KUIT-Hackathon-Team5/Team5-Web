@@ -29,7 +29,7 @@ export const StyledDiv = styled.div`
     p {
       margin: 0;
       padding: 0;
-      width: 88px;
+      width: auto;
       height: 21px;
       flex-shrink: 0;
       color: #FFF;
@@ -41,9 +41,9 @@ export const StyledDiv = styled.div`
   }
 
   .sub {
-    padding-left: 72px;
+    padding-left: 20px;
     padding-top: 6px;
-    width: 249px;
+    width: auto;
     height: 12px;
     flex-shrink: 0;
     color: #FFF;
