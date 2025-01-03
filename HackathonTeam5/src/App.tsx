@@ -7,6 +7,7 @@ import Router from "./router/Router";
 //import PostDetail from "./pages/postdetail/PostDetail";
 //import Reaction from "./pages/reaction/Reaction";
 //import Placeholder from "../src/assets/placeholder_rec.svg"
+
 function App() {
    return <Router />; // JSX 요소 반환
   /*

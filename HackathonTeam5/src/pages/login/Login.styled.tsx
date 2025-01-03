@@ -8,10 +8,11 @@ export const LoginContainer = styled.div`
     height: 853px;
     border: 1px solid #42D596;
     position: relative;
+    background-color: white;
 `
 
 export const LoginTitle = styled.div`
-    margin-top: 154px;
+    margin-top: 104px;
     margin-bottom: 100px;
     width: 153px;
     height: 37px;
