@@ -18,22 +18,8 @@ const Reaction = () => {
     ];
   return (
     <>
-    <div>
     <Statusbar />
     <AppTitle/>
-    <div style={{
-        width: 395,
-        height: 125,
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(0, 0, 0, 0.50)',
-        filter: 'brightness(0.5)', // 명암을 줄 수 있는 필터
-        zIndex: 1
-    }} />
-    </div>
     <Container>
         <Header>
             <p className='title'>반응 둘러보기</p>

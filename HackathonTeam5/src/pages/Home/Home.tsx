@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useRef, useEffect } from "react";
-
+import thumbnail from "../../assets/hackathon.jpg";
 // Post 인터페이스
 interface Post {
   postId: number;
@@ -156,18 +156,28 @@ const Home = () => {
       </FilterButton>
 
       <ListContainer>
-        {postResponse?.posts.map((post) => (
-          <PostItem
-            key={post.postId} // 고유한 key로 postId 사용
-            thumbnail="thumbnail" // 적절한 값을 전달해야 함
-            category={post.type}
-            title={post.title}
-            time={new Date(post.startTime).toLocaleDateString()} // ISO 날짜를 로컬 날짜 형식으로 변환
-            location={post.place}
-            body={post.contents}
-          />
-        ))}
-      </ListContainer>
+  {postResponse?.posts.map((post) => (
+    <PostItem
+      key={post.postId} // 고유한 key로 postId 사용
+      postId={post.postId.toString()} // postId를 문자열로 전달 (PostItem의 prop 타입과 일치시킴)
+      thumbnail={thumbnail} // 고정된 이미지 경로 사용 (필요 시 동적으로 설정)
+      category={post.type} // 게시물 타입
+      title={post.title} // 게시물 제목
+      time={`${new Date(post.startTime).toLocaleDateString()} ~ ${new Date(post.endTime).toLocaleDateString()}`} // 시작 날짜와 종료 날짜 표시
+      location={post.place} // 장소
+      body={post.contents} // 게시물 내용
+      categoryTitle="카테고리" // 필요하다면 적절한 카테고리 제목으로 수정
+      type={post.type} // 게시물 타입
+      organizer="주최자 정보 없음" // organizer가 없다면 기본값 사용
+      startTime={post.startTime} // 시작 시간 (ISO 8601 형식)
+      endTime={post.endTime} // 종료 시간 (ISO 8601 형식)
+      place={post.place} // 장소
+      contents={post.contents} // 상세 내용
+      organizer_link="" // 주최자 링크 기본값
+      images={[]} // 이미지 배열 기본값
+    />
+  ))}
+</ListContainer>
 
       <ConfirmButtonWrapper>
         <ConfirmButton
