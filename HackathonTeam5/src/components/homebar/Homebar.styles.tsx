@@ -16,7 +16,7 @@ export const Container = styled.div<ContainerProps>`
   position: absolute;
   bottom: 0;
   background-color: ${({ bgColor }) => bgColor || 'transparent'}; /* 기본값은 transparent */
-  
+  z-index: 100;
   .bar {
     width: 139px;
     height: 5px;
