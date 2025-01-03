@@ -1,5 +1,7 @@
 import Statusbar from "../../components/statusbar/Statusbar";
 import AppTitle from "../../components/title/AppTitle";
+import { useNavigate } from "react-router-dom"; // 추가
+
 import {
   CreatePostContainer,
   PostContentsContainer,
@@ -38,6 +40,7 @@ interface ErrorResponse {
 }
 
 const CreatePost = () => {
+  const navigate = useNavigate(); // 추가
   const [isOn, setIsOn] = useState(true);
   const [category, setCategory] = useState<string>("동아리");
   const [type, setType] = useState("");
@@ -148,6 +151,7 @@ const CreatePost = () => {
         console.log("Status:", response.data.status);
         console.log("Message:", response.data.message);
         alert("게시글 업로드 성공!!");
+        navigate("/"); // 업로드 성공 후 "/"로 이동
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {

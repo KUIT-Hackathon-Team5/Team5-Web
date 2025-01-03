@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   PostItemContainer,
   PostBody,
@@ -10,7 +11,7 @@ import {
 } from "./PostItem.styled";
 import thumbnail from "../../assets/thumbnail.png"
 import heart from "../../assets/heart.png"
-
+import heartFilled from "../../assets/heart-filled.svg"; // 채워진 하트 이미지 추가
 interface PostItemProps {
   thumbnail: string;
   category: string;
@@ -22,6 +23,12 @@ interface PostItemProps {
 
 const PostItem = (props: PostItemProps) => {
 
+  const [isLiked, setIsLiked] = useState(false); // 하트 클릭 상태 관리
+
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked); // 클릭 시 상태 반전
+  };
+
   return (
     <PostItemContainer>
       <PostItemThumbnail src={thumbnail} alt="이미지" />
@@ -29,8 +36,11 @@ const PostItem = (props: PostItemProps) => {
       <PostItemContents>
         <PostCategory>
           <div>{props.category}</div>
-          <button type="button">
-            <img src={heart} alt="게시글 저장" />
+          <button type="button" onClick={handleLikeClick}>
+          <img
+              src={isLiked ? heartFilled : heart} // 상태에 따라 이미지 변경
+              alt="게시글 저장"
+            />
           </button>
         </PostCategory>
         <PostTitle>
