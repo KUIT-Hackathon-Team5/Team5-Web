@@ -1,7 +1,8 @@
 import "./App.css";
+import Login from "./pages/login/Login";
 
 function App() {
-  return <h1>test commit!!!-seokjin kim</h1>;
+  return <Login />;
 }
 
 export default App;
