@@ -1,31 +1,33 @@
+import React, { useState } from "react";
 import Circle from "../../assets/circle.svg";
 import Plus from "../../assets/plus.svg";
 import UploadCircle from "../../assets/uploadButton_circle.svg";
 import UploadArrow from "../../assets/uploadButton_arrow.svg";
-import { Container, ImageWrapper, ImageWrapper2, CircleImage, PlusImage, UploadCircleImage, UploadArrowImage} from "./InputBar.styled";
-import ConfirmButton from "../button/confirmButton";
+import { Container, ButtonWrapper, CircleImage, PlusImage, UploadCircleImage, UploadArrowImage } from "./InputBar.styled";
+import UserInputField from "../userInputField/UserInputField";
 
 const InputBar = () => {
+  const [comment, setComment] = useState(""); // 사용자 입력 값을 관리하는 state
+
   return (
     <Container>
-      <ImageWrapper>
+      <ButtonWrapper>
         <CircleImage src={Circle} alt="green-circle" />
         <PlusImage src={Plus} alt="green-plus" />
-      </ImageWrapper>
-      <ConfirmButton
-        text="댓글입력"
+      </ButtonWrapper>
+      <UserInputField 
         width="255px"
-        height="38px"
-        fontSize="14px"
-        backgroundcolor="#c6c6c6"
-        onClick={() => {
-          console.log("버튼이 클릭되었습니다!");
-        }}
+        height="16px"
+        type="text"
+        id="댓글"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        placeholder="댓글입력"
       />
-      <ImageWrapper2>
-        <UploadCircleImage src= { UploadCircle } alt="upload-circle" />
-        <UploadArrowImage src= { UploadArrow } alt="upload-image" />
-      </ImageWrapper2>
+      <ButtonWrapper>
+        <UploadCircleImage src={UploadCircle} alt="upload-circle" />
+        <UploadArrowImage src={UploadArrow} alt="upload-image" />
+      </ButtonWrapper>
     </Container>
   );
 };

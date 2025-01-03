@@ -1,16 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-display: flex;
-width: 139px;
-height: 5px;
-padding: 13px 127px 9.496px 127px;
-justify-content: center;
-align-items: center;
-flex-shrink: 0;
-position: absolute;
-bottom: 0;
-
 // styled-components에서 props 타입 명시
 interface ContainerProps {
   bgColor?: string;
@@ -27,7 +16,7 @@ export const Container = styled.div<ContainerProps>`
   position: absolute;
   bottom: 0;
   background-color: ${({ bgColor }) => bgColor || 'transparent'}; /* 기본값은 transparent */
-  
+  z-index: 100;
   .bar {
     width: 139px;
     height: 5px;

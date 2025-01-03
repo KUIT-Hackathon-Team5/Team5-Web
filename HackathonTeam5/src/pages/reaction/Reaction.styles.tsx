@@ -6,6 +6,11 @@ export const Container = styled.div`
     height: 723.5px;
     flex-shrink: 0;
     border-radius: 20px 20px 0px 0px;
+    
+    .InputBar_container {
+        position: absolute;
+        bottom: 27.5px;
+    }
 `
 
 export const Header = styled.div`

@@ -9,20 +9,30 @@ export const Container = styled.div`
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+
+  // 두 번째 자식을 타겟팅
+  & > :nth-child(2) {
+    margin: 0;
+  }
 `;
 
-export const ImageWrapper = styled.div`
+export const ButtonWrapper = styled.button`
   position: relative;
-  width: 40px; /* Circle 이미지 크기 */
+  width: 40px;
   height: 40px;
+  background: none; /* 기본 버튼 스타일 제거 */
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer; /* 버튼으로 인식 가능하도록 커서 변경 */
 `;
 
 export const CircleImage = styled.img`
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  left: -25%;
+  width: 40px;
+  height: 40px;
   z-index: 1;
 `;
 
@@ -30,33 +40,27 @@ export const PlusImage = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 16px; /* 십자가 크기 */
+  width: 16px;
   height: 16px;
-  transform: translate(-50%, -50%); /* 중앙 정렬 */
-  z-index: 2; /* Circle 위에 위치 */
-`;
-
-export const ImageWrapper2 = styled.div`
-  position: relative;
-  width: 40px; /* UploadCircle 이미지 크기 */
-  height: 40px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 `;
 
 export const UploadCircleImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* 배경 이미지 */
+  width: 38px;
+  height: 38px;
+  z-index: 1;
 `;
 
 export const UploadArrowImage = styled.img`
   position: absolute;
   top: 50%;
-  left: 50%;
-  width: 16px; /* 화살표 크기 */
+  left: 73%;
+  width: 16px;
   height: 16px;
-  transform: translate(-50%, -50%); /* 중앙 정렬 */
-  z-index: 2; /* UploadCircle 위에 위치 */
+  transform: translate(-50%, -50%);
+  z-index: 2;
 `;
