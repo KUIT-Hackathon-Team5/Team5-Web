@@ -8,6 +8,7 @@ export const LoginContainer = styled.div`
     height: 853px;
     border: 1px solid #42D596;
     position: relative;
+    background-color: white;
 `
 
 export const LoginTitle = styled.div`
