@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled.div<{backgroundcolor?: string}>`
     width: 393px;
     height: 42px;
-    background-color: white;
+    background-color: ${(props) => props.backgroundcolor || "white"};
 `
 
 export const TitleImage = styled.img`

@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column; // 자식 요소를 세로로 배치
   margin-top: 20px;
-`;
+`; 
 
 export const UserInputLabel = styled.label`
   font-weight: bold;
@@ -17,9 +17,14 @@ export const InputWrapper = styled.div`
   display: flex;
 `;
 
-export const UserInput = styled.input`
-  width: 323px;
-  height: 20px;
+interface UserInputProps {
+  width?: string;
+  height?: string;
+}
+
+export const UserInput = styled.input<UserInputProps>`
+  width: ${(props) => props.width || "323px"};
+  height: ${(props) => props.height || "20px"};
   border-radius: 30px;
   border: 1px solid #afb1b6;
   padding: 12px;

@@ -11,9 +11,6 @@ export const Container = styled.div<{ backgroundcolor?: string }>`
 
   //padding: 0 12px; /* 좌우 여백 */
   box-sizing: border-box;
-  position: absolute; /* 화면 상단 고정 */
-  top: 0; /* 상단 위치 */
-  left: 0; /* 좌측 위치 */
 
   .time {
     left: 15px;

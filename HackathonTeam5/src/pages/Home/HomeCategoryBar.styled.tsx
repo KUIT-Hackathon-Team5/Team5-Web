@@ -8,7 +8,6 @@ export const CategoryContainer = styled.div`
   height: 42px;
   gap: 30px;
   background-color: white;
-  margin-top: 15px;
 `;
 
 export const CategoryButton = styled.button<{ isactive: boolean }>`

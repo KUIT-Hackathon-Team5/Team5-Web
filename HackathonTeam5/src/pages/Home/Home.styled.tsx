@@ -4,8 +4,6 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f3f3f3;
-  display: flex;
-  flex-direction: column;
   align-items: center; // 자식 요소를 수평 중앙 정렬
   width: 393px;
   height: 853px;
