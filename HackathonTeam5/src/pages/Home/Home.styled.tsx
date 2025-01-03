@@ -13,6 +13,7 @@ export const HomeContainer = styled.div`
   overflow-y: auto; // 세로 스크롤 활성화
   overflow-x: hidden; // 가로 스크롤 숨김
   box-sizing: border-box;
+  position: relative;
 
   /* 스크롤바 스타일 숨기기 */
   ::-webkit-scrollbar {

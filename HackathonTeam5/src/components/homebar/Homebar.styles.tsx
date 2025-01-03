@@ -8,6 +8,8 @@ padding: 13px 127px 9.496px 127px;
 justify-content: center;
 align-items: center;
 flex-shrink: 0;
+position: absolute;
+bottom: 0;
 
 .bar {
     width: 139px;

@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
   display: flex;
-  padding-left: 30px;
+  padding: 10px 0 10px 30px;
   align-items: center;
   width: 393px;
   height: 42px;
   gap: 30px;
   background-color: white;
+  margin-top: 15px;
 `;
 
 export const CategoryButton = styled.button<{ isactive: boolean }>`

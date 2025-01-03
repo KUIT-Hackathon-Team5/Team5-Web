@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ConfirmButton from "../../components/button/confirmButton";
 import UserInputField from "../../components/userInputField/UserInputField";
 import { SignUpContainer, SignUpForm } from "./Signup.styled";
+import Statusbar from "../../components/statusbar/Statusbar";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -63,6 +64,7 @@ const Signup = () => {
 
   return (
     <SignUpContainer>
+      <Statusbar></Statusbar>
       <h2>회원가입</h2>
 
       <SignUpForm>
