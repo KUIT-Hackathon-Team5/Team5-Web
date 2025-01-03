@@ -40,7 +40,7 @@ export const PopularEventsContainer = styled.div`
 export const PopularEventsList = styled.div`
   display: flex;
   gap: 16px;
-
+  /**
   overflow-y: hidden;
   overflow-x: auto;
   width: 100%;
@@ -50,8 +50,9 @@ export const PopularEventsList = styled.div`
   }
 
   /* Firefox */
-  scrollbar-width: none; /* 스크롤바 숨기기 */
-  -ms-overflow-style: none; /* IE, Edge */
+  //scrollbar-width: none; /* 스크롤바 숨기기 */
+  //-ms-overflow-style: none; /* IE, Edge */
+  
 `;
 
 export const FilterButton = styled.button`
@@ -84,6 +85,6 @@ export const ListContainer = styled.div`
 
 export const ConfirmButtonWrapper = styled.div`
   position: fixed;
-  bottom: 140px;
+  bottom: 70px;
   z-index: 1000; // 다른 요소 위로 띄움
 `;

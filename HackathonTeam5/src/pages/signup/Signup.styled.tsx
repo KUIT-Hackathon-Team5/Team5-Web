@@ -7,7 +7,7 @@ export const SignUpContainer = styled.div`
   width: 393px;
   height: 853px;
   border: 1px solid #42D596;
-
+  position: relative;
   & > h2 {
     font-weight: bold;
     font-size: 20px;
