@@ -39,14 +39,14 @@ interface ErrorResponse {
   message: string; // 에러 메시지
   timestamp: number; // 에러 발생 시간 (밀리초)
 }
-
 const Signup = () => {
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [authCode, setAuthCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
-  const navigate = useNavigate(); // useNavigate 훅 추가
+  const navigate = useNavigate();
+
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newNickname = e.target.value;
     setNickname(newNickname);
@@ -100,12 +100,10 @@ const Signup = () => {
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
-          // 에러 응답이 있는 경우
           console.error("Error Status:", error.response.data.status);
           console.error("Error Message:", error.response.data.message);
           console.error("Error Timestamp:", error.response.data.timestamp);
         } else {
-          // 기타 에러
           console.error("Unexpected Error:", error.message);
         }
       });
@@ -130,16 +128,18 @@ const Signup = () => {
       .then((response) => {
         console.log(response);
         console.log("Status:", response.data.status);
-        console.log("Message:", response.data.message);
+        if (response.data.status === 200) {
+          window.alert("가입 가능한 닉네임입니다!");
+        } else if (response.data.status === 301) {
+          window.alert("중복된 닉네임입니다!");
+        }
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
-          // 에러 응답이 있는 경우
           console.error("Error Status:", error.response.data.status);
           console.error("Error Message:", error.response.data.message);
           console.error("Error Timestamp:", error.response.data.timestamp);
         } else {
-          // 기타 에러
           console.error("Unexpected Error:", error.message);
         }
       });
@@ -163,17 +163,18 @@ const Signup = () => {
       )
       .then((response) => {
         console.log(response);
-        console.log("Status:", response.data.status);
-        console.log("Message:", response.data.message);
+        if (response.data.status === 200) {
+          window.alert("인증번호 발송완료");
+        } else {
+          window.alert("이메일을 다시입력해주세요!");
+        }
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
-          // 에러 응답이 있는 경우
           console.error("Error Status:", error.response.data.status);
           console.error("Error Message:", error.response.data.message);
           console.error("Error Timestamp:", error.response.data.timestamp);
         } else {
-          // 기타 에러
           console.error("Unexpected Error:", error.message);
         }
       });
@@ -183,13 +184,17 @@ const Signup = () => {
   const verifyAuthCode = () => {
     axios
       .get<VerifyAuthCodeResponse>(
-        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/emails/verifications?email=${encodeURIComponent(email)}&code=${encodeURIComponent(authCode)}`
+        `http://ec2-3-39-86-18.ap-northeast-2.compute.amazonaws.com:8080/users/emails/verifications?email=${encodeURIComponent(
+          email
+        )}&code=${encodeURIComponent(authCode)}`
       )
       .then((response) => {
         console.log("Response:", response.data);
-        console.log("Status:", response.data.status);
-        console.log("Message:", response.data.message);
-        console.log("Verified:", response.data.data.verified);
+        if (response.data.data.verified) {
+          window.alert("인증성공!");
+        } else {
+          window.alert("인증번호를 다시입력해주세요");
+        }
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (error.response) {
@@ -202,29 +207,25 @@ const Signup = () => {
       });
   };
 
-  /// 버튼의 onClick에 넘길 메서드들
-  // 닉네임 중복확인
+  // 버튼의 onClick에 넘길 메서드들
   const handleCheckNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("HandleCheckNickname");
     verifyNickname();
   };
 
-  // 인증번호 발송
   const handleSendAuthCode = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("HandleSendAuthCode");
     requestAuthCode();
   };
 
-  // 인증번호 확인
   const handleConfirmAuthCode = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("HandleConfirmAuthCode");
     verifyAuthCode();
   };
 
-  // 회원가입 요청
   const handleSignUp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("SignUp Attempted with:");
@@ -245,6 +246,7 @@ const Signup = () => {
     !isPasswordValid(password) ||
     !isPasswordValid(confirmedPassword) ||
     password !== confirmedPassword;
+
   const isSendAuthCodeButtonDisabled = !email;
   const isCheckAuthCodeButtonDisabled = !authCode;
 

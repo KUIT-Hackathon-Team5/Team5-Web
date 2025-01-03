@@ -9,7 +9,7 @@ import {
   PostScheduleInfo,
   PostTitle,
 } from "./PostItem.styled";
-import thumbnail from "../../assets/thumbnail.png"
+import thumbnail from "../../assets/hackathon.jpg"
 import heart from "../../assets/heart.png"
 import heartFilled from "../../assets/heart-filled.svg"; // 채워진 하트 이미지 추가
 interface PostItemProps {
